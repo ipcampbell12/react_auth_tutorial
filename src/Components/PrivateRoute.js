@@ -1,19 +1,13 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 //create wrapper for current route
-function PrivateRoute({ component: Component, ...rest }) {
+function PrivateRoute({ children }) {
 
     const { currentUser } = useAuth()
 
-    return (
-        <Route {...rest}
-            render={props => {
-                return currentUser ? <Component {...props} /> : <Redirect to="/login" />
-            }} >
-        </Route >
-    );
+    return currentUser ? children : <Navigate to="/login" />;
 }
 
 export default PrivateRoute;
