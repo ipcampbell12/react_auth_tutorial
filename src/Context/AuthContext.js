@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true)
 
 
-    //these are the only 2 functions that would need to be changed if you wanted to use a different server beseides firebase
+    //these are the only 3 functions that would need to be changed if you wanted to use a different server beseides firebase
 
     function signup(email, password) {
         return auth.createUserWithEmailAndPassword(email, password)
@@ -21,6 +21,11 @@ export function AuthProvider({ children }) {
 
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
+    }
+
+    function logout() {
+        return auth.signOut()
+
     }
 
     useEffect(() => {
@@ -39,6 +44,7 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser,
         login,
+        logout,
         signup
     }
     return (
